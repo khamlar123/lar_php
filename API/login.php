@@ -1,7 +1,8 @@
 <?php 
     include('connect.php');
-    session_start();
-    $data = array();
+   
+    $data = array(); //get input data
+    $dataRe = array(); //send result data
     $json = file_get_contents('php://input');
     $data = json_decode($json, TRUE);
 
@@ -15,15 +16,11 @@
         $res = mysqli_query($conn,$sql);
         if(mysqli_query($conn, $sql)){
             while($row = mysqli_fetch_array($res)){
-                $data['id'] = $row["adminid"];
-                $data['passowrd'] = $row["password"];
+                $dataRe['id'] = $row["adminid"];
+                $dataRe['name'] = $row["adminname"];
                 $pass = $row["password"];
-                $id = $row["adminid"];
-
-                $_SESSION['adminid']=$row["adminid"];
-                $_SESSION['adminname']=$row["adminname"];
-                
-                
+                $id = $row["adminid"];   
+           
                 //check password
                 if (password_verify($password, $pass)) {
                     // save date in to hitory
@@ -36,19 +33,20 @@
                             $res = mysqli_query($conn,$sql);
                             if(mysqli_query($conn, $sql)){
                                 while($row = mysqli_fetch_array($res)){
-                                    $data['id'] = $row["id"];
-                                    $hitoryId = $row["id"];
-                                    $_SESSION['hisId']=$row["id"];      
+   
+                                    $dataRe['historyid'] = $row["id"];    
+                                    if($id !=""){
+                                        $token = password_hash($password.$email, PASSWORD_DEFAULT);
+                                        $sqlt = "UPDATE `tb_admin` SET `token`='$token' WHERE `adminid`= $id";
+                                        $rest = mysqli_query($conn, $sqlt);
+                                        $dataRe['token'] = $token;
+                                        // $_SESSION['token']=$token;
+                                        // header('location:../view/home.php');
+                                    }
                                 }
-                               
-                                if($id !=""){
-                                    $token = password_hash($password.$email, PASSWORD_DEFAULT);
-                                    $sql = "UPDATE `tb_admin` SET `token`='$token' WHERE `adminid`= $id";
-                                    $res = mysqli_query($conn, $sql);
-                                    $_SESSION['token']=$token;
-                                    header('location:../view/index.php');
-                                }
-                            
+                                $output['code'] = '200';
+                                $output['msg'] = $dataRe;
+                                echo json_encode($output);
                             } 
                         }
                         //end get history id
@@ -62,11 +60,11 @@
                     die;
                 }
                 //end check password
-                // echo json_encode($data);
             }
         }
     }else{
-        echo 'plzz input your email';
+        $output['code'] = '201';
+        $output['msg'] = 'plzz endter your email!!';
+        echo json_encode($output);
     }
-    mysqli_close();
 ?>
