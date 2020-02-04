@@ -1,6 +1,6 @@
 <?php 
     include('../API/connect.php');
-    session_start();    
+    // session_start();    
         $email =$_POST['email'];
         $password =$_POST['password'];
 
@@ -17,17 +17,22 @@
         $json_data = json_decode($return, true);
         $curl_error = curl_error($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        //     echo json_encode($json_data);
+            // echo json_encode($json_data);
+            // die;
         //     echo $_SESSION['token'];
+        setcookie("token", $json_data['msg']['token'], time()+3600, "/","", 0);
+        setcookie("hisid", $json_data['msg']['historyid'], time()+3600, "/","", 0);
+        setcookie("adminid", $json_data['msg']['id'], time()+3600, "/","", 0);
             if($json_data['code'] != 200){
                 echo "<script>
                 alert('Incorrect email or passowrd!!');location='../view/index.php';
                 </script>";
             }else{
+               
                 header('location:../view/home.php');
-                $_SESSION['token']=$json_data['msg']['token'];
-                $_SESSION['hisid']=$json_data['msg']['historyid'];
-                $_SESSION['adminid']=$json_data['msg']['adminid'];
+                // $_SESSION['token']=$json_data['msg']['token'];
+                // $_SESSION['hisid']=$json_data['msg']['historyid'];
+                // $_SESSION['adminid']=$json_data['msg']['adminid'];
             }
               // echo $json_data['msg']['pass'];
               die;
@@ -36,7 +41,7 @@
                 alert('plzz enter your email!!');location='../view/index.php';
                 </script>";
         }
-   mysqli_close();
+//    mysqli_close();
         
             
 ?>

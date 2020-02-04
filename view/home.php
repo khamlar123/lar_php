@@ -1,14 +1,23 @@
 <?php 
     include('../API/connect.php');
-	session_start();
-    @$adminid=$_SESSION['adminid'];
+    // echo $_COOKIE["token"];
+	// session_start();
+    // @$adminid=$_SESSION['adminid'];
     // echo'adminid'. $adminid;
-    @$historyid=$_SESSION['hisid'];
+    // @$historyid=$_SESSION['hisid'];
     // echo 'historyid'. $historyid;
-    @$token=$_SESSION['token'];
+    // @$token=$_SESSION['token'];
     // echo 'token'. $token."</br>";
 
-    if(@$token ==""){
+    // setcookie( "token", "", time()- 60, "/","", 0);
+    // die;
+    // echo $_COOKIE["token"];
+    // echo $_COOKIE["hisid"];
+    // echo $_COOKIE["adminid"];
+    // die;
+
+    if($_COOKIE["token"]==""){
+
         echo "<script>
         alert('plzz login!!');location='index.php';</script>";
     }else{   
@@ -19,11 +28,9 @@
                 // $data['token'] = $row["token"];
                 $checkToken = $row["token"];  
             }
-            if($token != $checkToken){
+            if($_COOKIE["token"] != $checkToken){
                 echo "<script>
-                alert('plaa login');location='index.php';</script>";
-             
-                
+                alert('plaa login');location='index.php';</script>"; 
             }else{	
                 echo 'login now';
             }

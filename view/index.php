@@ -119,7 +119,7 @@
                     <form action="../callAPI/call_login.php" method="POST">
                         <input type="text" name="email" id="email" placeholder="Email"><br>
                         <input type="password" name="password" id="password" placeholder="password"><br>
-                        <input type="submit" id="Submit" value="Login" class="btn btn-common">
+                        <input type="submit" id="Submit" value="LogIn" class="btn btn-common">
                     </form>
                 </div>
                 <img src="images/home/slider/slide1/house.png" class="img-responsive slider-house" alt="slider image">
