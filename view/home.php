@@ -36,10 +36,14 @@
             }
         }
   
+
 ?>
 
 <h1>HALO</h1>
-<a href="http://localhost/my_project/API/logout.php">logout</a>
+<form action="../API/logout.php" method="POST">
+<input type="submit" value="logOut">
+ </form>
+<!-- <a href="http://localhost/my_project/API/logout.php">logout</a> -->
 
 <?php 
     }
