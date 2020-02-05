@@ -21,10 +21,14 @@
             VALUES ('$aname', '$alname', '$email', '$p', '$address', '$created', '$mdate', '$phone', '$img', '$token')";
 
             // echo $sql;
-            // die;
+
     if(mysqli_query($conn, $sql)){
-        echo 'ok';
+       $output['code']='200';
+       $output['msg']= $data;
+       echo json_decode($output);
     }else{
-        echo 'no';
+        $output['code']='201';
+        $output['msg']= 'addres ad min user error';
+        echo json_decode($output);
     }
 ?>

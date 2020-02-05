@@ -15,7 +15,6 @@
     // echo $_COOKIE["hisid"];
     // echo $_COOKIE["adminid"];
     // die;
-
     if($_COOKIE["token"]==""){
 
         echo "<script>
