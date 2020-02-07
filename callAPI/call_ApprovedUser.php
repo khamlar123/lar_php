@@ -1,5 +1,4 @@
 <?php 
-    $id = 1;
     $id = $_POST['id'];
     $name = $_POST['name'];
     $lname = $_POST['lname'];

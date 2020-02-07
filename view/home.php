@@ -157,8 +157,8 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">Blog</h1>
-                            <p>Blog with right sidebar</p>
+                            <h1 class="title">User Reques</h1>
+                            <!-- <p>Blog with right sidebar</p> -->
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,8 @@
                                                 <input type="submit" id="Submit" value="Approved" class="btn btn-common">
                                             </form></li>
 
-                                            <li> <form action="../callAPI/call_login.php" method="GET">
+                                            <li> <form action="../callAPI/call_RejectUser.php" method="POST">
+                                                <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden >
                                                 <input type="submit" id="Submit" value="Reject" class="btn btn-common">
                                             </form></li>
                                             <!-- <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li> -->
@@ -266,8 +267,8 @@
                 </div>
                 <div class="col-sm-12">
                     <div class="copyright-text text-center">
-                        <p>&copy; Your Company 2014. All Rights Reserved.</p>
-                        <p>Designed by <a target="_blank" href="http://www.themeum.com">Themeum</a></p>
+                        <p>&copy; Freeland All Rights Reserved.</p>
+                        <p>Designed by <a target="_blank" href="https://www.facebook.com/kham.chanthavong.96?ref=bookmarks">Khamlar CHANTHAVONF</a></p>
                     </div>
                 </div>
             </div>
