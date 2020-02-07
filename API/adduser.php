@@ -15,9 +15,12 @@
     $modifydate = $data['modifydata'];
     $img = $data['img'];
     $role = $data['role'];
+    $village = $data['village'];
+    $city = $data['city'];
+    $provice = $data['province'];
 
-    $sql ="INSERT INTO `tb_userReques`(`name`, `lname`, `email`, `phone`, `address`, `create`, `modifydate`, `img`, `role`)
-             VALUES ('$name', '$lname', '$email', '$phone', '$address', '$create', '$modifydate', '$img', '$role')";
+    $sql ="INSERT INTO `tb_userReques`(`name`, `lname`, `email`, `phone`, `address`, `create`, `modifydate`, `img`, `role`, `Village`, `City`, `Province`)
+             VALUES ('$name', '$lname', '$email', '$phone', '$address', '$create', '$modifydate', '$img', '$role', '$village', '$city', '$provice')";
 
     // echo $sql;
     if(mysqli_query($conn, $sql)){

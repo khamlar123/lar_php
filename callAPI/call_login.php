@@ -23,6 +23,7 @@
         setcookie("token", $json_data['msg']['token'], time()+3600, "/","", 0);
         setcookie("hisid", $json_data['msg']['historyid'], time()+3600, "/","", 0);
         setcookie("adminid", $json_data['msg']['id'], time()+3600, "/","", 0);
+        setcookie("adminname", $json_data['msg']['name'], time()+3600, "/","", 0);
             if($json_data['code'] != 200){
                 echo "<script>
                 alert('Incorrect email or passowrd!!');location='../view/index.php';
