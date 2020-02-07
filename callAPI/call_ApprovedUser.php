@@ -40,7 +40,6 @@
     $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     // echo json_encode($json_REU);
     // echo $json_REU['msg']['name'];
-
     // die;
     if($json_REU['code']=="200"){
         echo "<script>";

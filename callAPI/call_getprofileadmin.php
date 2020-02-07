@@ -1,16 +1,9 @@
 <?php 
-    // include('../API/connect.php');
-    // session_start();    
-        // $adminid =$_POST['adminid'];
-        // $token = $_POST['token'];
-
-        $adminid = 3;
-
-        // if($adminid && $token != ""){
-        if($adminid != ""){
+        $adminid = $_COOKIE["adminid"];
+        $token = $_COOKIE["token"];
+        if($adminid && $token != ""){
     	$data = array(
             "adminid" => $adminid
-      
         );
         $ch = curl_init( 'http://localhost/my_project/API/getprofileadmin.php' );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -20,15 +13,14 @@
         $json_data = json_decode($return, true);
         $curl_error = curl_error($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            // echo json_encode($json_data);
-
+            // echo json_encode($json_data)
             // echo json_encode($data);
             // die;
             // echo $json_data['msg']['name'];
-
-
-        }
-//    mysqli_close();        
+        }else{
+            echo "<script>
+                alert('plzz login!!');location='../view/index.php';</script>";
+        } 
 ?>
 
 
