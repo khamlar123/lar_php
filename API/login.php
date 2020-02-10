@@ -19,8 +19,7 @@
                 $dataRe['id'] = $row["adminid"];
                 $dataRe['name'] = $row["adminname"];
                 $pass = $row["password"];
-                $id = $row["adminid"];   
-           
+                $id = $row["adminid"];  
                 //check password
                 if (password_verify($password, $pass)) {
                     // save date in to hitory
@@ -33,38 +32,90 @@
                             $res = mysqli_query($conn,$sql);
                             if(mysqli_query($conn, $sql)){
                                 while($row = mysqli_fetch_array($res)){
-   
                                     $dataRe['historyid'] = $row["id"];    
                                     if($id !=""){
                                         $token = password_hash($password.$email, PASSWORD_DEFAULT);
                                         $sqlt = "UPDATE `tb_admin` SET `token`='$token' WHERE `adminid`= $id";
                                         $rest = mysqli_query($conn, $sqlt);
                                         $dataRe['token'] = $token;
-                                        // $_SESSION['token']=$token;
-                                        // header('location:../view/home.php');
                                     }
                                 }
                                 $output['code'] = '200';
                                 $output['msg'] = $dataRe;
                                 echo json_encode($output);
+                                die;
                             } 
                         }
                         //end get history id
                     }else{
-                        echo 'error login date';
+                        $output['code'] = '201';
+                        $output['msg'] = 'login error';
+                        echo json_encode($output);
                         die;
                     }
                     //end save date in to hitory
                 }else{
-                    echo 'check your password';
+                    $output['code'] = '201';
+                    $output['msg'] = 'check your password';
+                    echo json_encode($output);
                     die;
                 }
                 //end check password
             }
         }
-    }else{
-        $output['code'] = '201';
-        $output['msg'] = 'plzz endter your email!!';
-        echo json_encode($output);
+        if($email !=""){
+            $sql = "SELECT * FROM `tb_user` WHERE `email`='$email'" ;
+            $res = mysqli_query($conn,$sql);
+            if(mysqli_query($conn,$sql)){
+                while($row = mysqli_fetch_array($res)){
+                    $dataRe['userid'] = $row["userid"];
+                    $dataRe['username'] = $row["name"];
+                    $pass = $row["password"];
+                    $userid = $row["userid"];
+
+                    // echo $userid;
+                    if (password_verify($password, $pass)) {
+                        $sql = "INSERT INTO `tb_hitory`(`loginDate`, `logoutDate`, `text`, `userId`, `adminId`) 
+                        VALUES ('$login', '00:00:00', 'null', '$userid', '0')";
+                        if(mysqli_query($conn, $sql)){
+
+                            if($login!=""){
+                                $sql = "SELECT * FROM `tb_hitory` WHERE `loginDate`='$login'" ;
+                                $res = mysqli_query($conn,$sql);
+                                if(mysqli_query($conn, $sql)){
+                                    while($row = mysqli_fetch_array($res)){
+                                        $dataRe['historyid'] = $row["id"];    
+                                        if($userid !=""){
+                                            $token = password_hash($password.$email, PASSWORD_DEFAULT);
+                                            $sqlt = "UPDATE `tb_user` SET `token`='$token' WHERE `userid`= $userid";
+                                            $rest = mysqli_query($conn, $sqlt);
+                                            $dataRe['token'] = $token;
+                                        }
+                                    }
+                                    $output['code'] = '200 user';
+                                    $output['msg'] = $dataRe;
+                                    echo json_encode($output);
+                                    die;
+                                } 
+                            }
+                        }
+                    }
+
+                    die;  
+                }
+            }else{
+                echo 'xxx';
+            }
+           
+        }
+
+        // $output['code'] = '201';
+        // $output['msg'] = 'plz check your email';
+        // echo json_encode($output);
+        // die;
     }
+    $output['code'] = '201';
+    $output['msg'] = 'error no have email';
+    echo json_encode($output);
+    die;
 ?>

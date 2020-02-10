@@ -1,5 +1,36 @@
 
 <?php
+    // $lar = 2;
+    
+class foo
+{
+   
+    function do_foo()
+    {
+        $lar =$_POST['lar'];
+        // echo "Doing foo."; 
+        if($lar == "2"){
+            echo 'fuck';
+        }else{
+            echo 'sk';
+        }
+    }
+
+    function lol()
+    {
+        $kk = $_POST['kk'];
+        if($kk = "3"){
+            echo 'kkkk';
+        }else{
+            echo 'lllll';
+        }
+    }
+}
+
+// $bar = new foo;
+// $bar->do_foo();
+// $l = new foo;
+// $l->lol();
 
 //test mobile or desktop play boawser//
 // function isMobile () {
