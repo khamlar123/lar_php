@@ -18,6 +18,9 @@
             setcookie( "token", "", time()- 60, "/","", 0);
             setcookie( "hisid", "", time()- 60, "/","", 0);
             setcookie( "adminid", "", time()- 60, "/","", 0);
+            setcookie( "adminname", "", time()- 60, "/","", 0);
+            setcookie( "userid", "", time()- 60, "/","", 0);
+            setcookie( "username", "", time()- 60, "/","", 0);
             header("location:../view/index.php");
 
             // function isMobile () {

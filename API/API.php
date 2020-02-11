@@ -1,10 +1,10 @@
 <?php  
-include('API/connect.php');
+include('connect.php');
 $data = array();
 $json = file_get_contents('php://input');
 $data = json_decode($json, TRUE);
 
-    if($data['api']=="userReques"){
+    if($data['api']=="getuserreques"){
         $data = array();
         // $dataRe = arrary();
         $json = file_get_contents('php://input');
@@ -19,6 +19,7 @@ $data = json_decode($json, TRUE);
                 $sub['name'] = $row["name"]; 
                 $sub['lname'] = $row["lname"]; 
                 $sub['email'] = $row["email"]; 
+                $sub['password'] = $row["password"];
                 $sub['phone'] = $row["phone"]; 
                 $sub['create'] = $row["create"]; 
                 $sub['img'] = $row["img"]; 
@@ -26,7 +27,7 @@ $data = json_decode($json, TRUE);
                 $sub['village'] = $row["village"]; 
                 $sub['city'] = $row["City"];
                 $sub['province'] = $row["Province"];
-                $sub['password'] = $row["password"];
+               
                 $data[] = $sub;               
             }
             $output['code'] = '200';
@@ -37,11 +38,10 @@ $data = json_decode($json, TRUE);
         $output['code'] = '201';
         $output['msg'] = 'error';
         echo json_encode($output);
-        die;
         }
     }
 
-    if($data['api']=="rejectUser"){
+    if($data['api']=="rejectuser"){
         $data = array();
         $json = file_get_contents('php://input');
         $data = json_decode($json, TRUE);
@@ -54,15 +54,17 @@ $data = json_decode($json, TRUE);
                     $output['code'] = '200';
                     $output['msg'] = $data;
                     echo json_encode($output);
+                    die;
                 }else{
                 $output['code'] = '201';
                 $output['msg'] = 'error';
                 echo json_encode($output);
+                die;
             }
         }
     }
 
-    if($data['api']=="ApprovedUser.php"){
+    if($data['api']=="approveduser"){
         $data = array();
         $json = file_get_contents('php://input');
         $data = json_decode($json, TRUE);
@@ -86,24 +88,27 @@ $data = json_decode($json, TRUE);
             $adminname = $data['adminname'];
             $token = '';
     
-            $sql = "INSERT INTO `tb_user`(`name`, `lastname`, `email`, `passowrd`, `phone`, `create`, `modifydate`, `img`, `token`, `role`, `adminApprovedDate`, `village`, `City`, `Province`, `adminApproved`)
+            $sql = "INSERT INTO `tb_user`(`name`, `lastname`, `email`, `password`, `phone`, `create`, `modifydate`, `img`, `token`, `role`, `adminApprovedDate`, `village`, `City`, `Province`, `adminApproved`)
              VALUES ('$name', '$lname', '$email', '$p', '$phone', '$create', '$modifydate', '$img', '$token', '$role', '$adminapp', '$village', '$city', '$province', '$adminname')";
+
             if(mysqli_query($conn, $sql)){
                 $sql ="DELETE FROM `tb_userReques` WHERE `id`= $id";
                 if(mysqli_query($conn, $sql)){
                     $output['code'] = '200';
                     $output['msg'] = $data;
                     echo json_encode($output);
+                    die;
                 }
                 
             }else{
                 $output['code'] = '201';
-                $output['msg'] = 'error';
+                $output['msg'] = 'approved user error';
                 echo json_encode($output);
+                die;
             }
     }
 
-    if($data['api']=="getprofileAdmin"){
+    if($data['api']=="getprofileadmin"){
         $dataRe = array();
         $data = array();
         $json = file_get_contents('php://input');
@@ -136,6 +141,7 @@ $data = json_decode($json, TRUE);
             $output['code'] = '201';
             $output['msg'] = 'errer show';
             echo json_encode($output);
+            die;
         }
     }
 
@@ -258,5 +264,101 @@ $data = json_decode($json, TRUE);
         $output['msg'] = 'error no have email';
         echo json_encode($output);
         die;
+    }
+
+    if($data['api'] == "adduser"){
+        $data = array();
+        $dataRe = array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+    
+        $name = $data['name'];
+        $lname = $data['lname'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $phone = $data['phone'];
+        date_default_timezone_set("Asia/Bangkok");
+        $create=date("Y-m-d H:i:s");
+    
+        $img = $data['img'];
+        $role = $data['role'];
+        $village = $data['village'];
+        $city = $data['city'];
+        $provice = $data['province'];
+    
+        $sql ="INSERT INTO `tb_userReques`(`name`, `lname`, `email`, `password`, `phone`,  `create`, `img`, `role`, `Village`, `City`, `Province`)
+                 VALUES ('$name', '$lname', '$email', '$password', '$phone',  '$create', '$img', '$role', '$village', '$city', '$provice')";
+        if(mysqli_query($conn, $sql)){
+            // echo 'ok';
+            $output['code'] = '200';
+            $output['msg'] = $data;
+            echo json_encode($output);
+        }else{
+            $output['code'] = '201';
+            $output['msg'] = 'add user error';
+            echo json_encode($output);
+        }
+    }
+
+    if($data['api'] == "addadminuser"){
+        $data = array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+
+        $aname = $data['adminname'];
+        $alname = $data['adminlastname'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $p = password_hash($password, PASSWORD_DEFAULT);
+        date_default_timezone_set("Asia/Bangkok");
+        $created=date("Y-m-d H:i:s");
+        $mdate = '00:00:00';
+        $phone = $data['phone'];
+        $img = $data['img'];
+        $token = '';
+        $village = $data['village'];
+        $city = $data['city'];
+        $province = $data['province'];
+        $whatapps = $data['whatapps'];
+
+        $sql = "INSERT INTO `tb_admin`(`adminname`, `adminlastname`, `email`, `password`, `createDate`, `modifyDate`, `phone`, `img`, `token`, `village`, `city`, `province`, `whatapps`) 
+                VALUES ('$aname', '$alname', '$email', '$p', '$created', '$mdate', '$phone', '$img', '$token', '$village', '$city', '$province', '$whatapps')";
+
+                // echo $sql;
+
+        if(mysqli_query($conn, $sql)){
+            $output['code']='200';
+            $output['msg']= $data;
+            echo json_encode($output);
+            die;
+        }else{
+            $output['code']='201';
+            $output['msg']= 'addres ad min user error';
+            echo json_encode($output);
+            die;
+        }
+    }   
+
+    if($data['api']=="logout"){
+        $token=$_COOKIE["token"];
+    $historyid=$_COOKIE["hisid"];
+    $adminid= $_COOKIE["adminid"];
+
+        date_default_timezone_set("Asia/Bangkok");
+        $logout=date("Y-m-d H:i:s");
+        $sql ="UPDATE `tb_hitory` SET `logoutDate`='$logout' WHERE `id`=$historyid";
+ 
+        if(mysqli_query($conn, $sql)){
+            setcookie( "token", "", time()- 60, "/","", 0);
+            setcookie( "hisid", "", time()- 60, "/","", 0);
+            setcookie( "adminid", "", time()- 60, "/","", 0);
+            // setcookie( "adminname", "", time()- 60, "/","", 0);
+            // setcookie( "userid", "", time()- 60, "/","", 0);
+            // setcookie( "username", "", time()- 60, "/","", 0);
+            header("location:../view/index.php");
+        }else{
+            echo 'logout error';
+            header("location:../view/404.php");
+        }
     }
 ?>

@@ -8,19 +8,19 @@
     $name = $data['name'];
     $lname = $data['lname'];
     $email = $data['email'];
+    $password = $data['password'];
     $phone = $data['phone'];
-    $address = $data['address'];
     date_default_timezone_set("Asia/Bangkok");
     $create=date("Y-m-d H:i:s");
-    $modifydate = $data['modifydata'];
+
     $img = $data['img'];
     $role = $data['role'];
     $village = $data['village'];
     $city = $data['city'];
     $provice = $data['province'];
 
-    $sql ="INSERT INTO `tb_userReques`(`name`, `lname`, `email`, `phone`, `address`, `create`, `modifydate`, `img`, `role`, `Village`, `City`, `Province`)
-             VALUES ('$name', '$lname', '$email', '$phone', '$address', '$create', '$modifydate', '$img', '$role', '$village', '$city', '$provice')";
+    $sql ="INSERT INTO `tb_userReques`(`name`, `lname`, `email`, `password`, `phone`,  `create`, `img`, `role`, `Village`, `City`, `Province`)
+    VALUES ('$name', '$lname', '$email', '$password', '$phone',  '$create', '$img', '$role', '$village', '$city', '$provice')";
 
     // echo $sql;
     if(mysqli_query($conn, $sql)){

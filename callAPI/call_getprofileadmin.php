@@ -1,11 +1,13 @@
 <?php 
+        $api = 'getprofileadmin';
         $adminid = $_COOKIE["adminid"];
         $token = $_COOKIE["token"];
         if($adminid && $token != ""){
     	$data = array(
+            "api" => $api,
             "adminid" => $adminid
         );
-        $ch = curl_init( 'http://localhost/my_project/API/getprofileadmin.php' );
+        $ch = curl_init( 'http://localhost/my_project/API/API.php' );
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));

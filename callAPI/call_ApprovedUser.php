@@ -1,4 +1,5 @@
 <?php 
+    $api = 'approveduser';
     $id = $_POST['id'];
     $name = $_POST['name'];
     $lname = $_POST['lname'];
@@ -12,8 +13,10 @@
     $password = $_POST['password'];
     $role = $_POST['role'];
     $adminname = $_POST['adminname'];
+
     
     $data = array(
+        "api" => $api,
         "id" => $id,
         "name" => $name,
         "lname" => $lname,
@@ -29,7 +32,7 @@
         "adminname" => $adminname,
     );
  
-    $ch = curl_init( 'http://localhost/my_project/API/ApprovedUser.php' );
+    $ch = curl_init( 'http://localhost/my_project/API/API.php' );
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));

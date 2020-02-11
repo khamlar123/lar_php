@@ -5,6 +5,8 @@
     // include('../callAPI/call_ApprovedUser.php');
     
     // echo $_COOKIE["token"];
+    // die;
+    // echo $_COOKIE["token"];
 	// session_start();
     // @$adminid=$_SESSION['adminid'];
     // echo'adminid'. $adminid;
@@ -31,7 +33,7 @@
                 // $data['token'] = $row["token"];
                 $checkToken = $row["token"];  
             }
-            if($_COOKIE["token"] != $checkToken){
+            if($_COOKIE["token"] == $checkToken){
                 echo "<script>
                 alert('plaa login');location='index.php';</script>"; 
             }else{	
@@ -215,7 +217,7 @@
                                 </div>
                             </div>
                         </div>
-                     
+                     <a href="http://localhost/my_project/API/logout.php" >dsafdf</a>
             
     </section>
         <?php } ?>

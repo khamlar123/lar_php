@@ -4,7 +4,7 @@
     if($_COOKIE["token"]==""){
 
         echo "<script>
-        alert('plzz login!!');location='index.php';</script>";
+        alert('plzz xxx!!');location='index.php';</script>";
     }else{   
         $sql = "SELECT * FROM `tb_user`" ;
         $res = mysqli_query($conn,$sql);
@@ -13,7 +13,7 @@
                 // $data['token'] = $row["token"];
                 $checkToken = $row["token"];  
             }
-            if($_COOKIE["token"] != $checkToken){
+            if($_COOKIE["token"] == $checkToken){
                 echo "<script>
                 alert('plaa login');location='index.php';</script>"; 
             }else{	
@@ -24,6 +24,6 @@
             }
         }
 ?>  
-    dasdasdasda
+ wellcom to the user home 
 
     <?php } ?>

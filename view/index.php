@@ -117,6 +117,7 @@
                     <p>Boudin doner frankfurter pig. Cow shank bresaola pork loin tri-tip tongue venison pork belly meatloaf short loin landjaeger biltong beef ribs shankle chicken andouille.</p>
                     <!-- <a href="#" class="btn btn-common">SIGN UP</a> -->
                     <form action="../callAPI/call_login.php" method="POST">
+                        <!-- <input type="text" name="api" value="login" hidden> <br> -->
                         <input type="text" name="email" id="email" placeholder="Email"><br>
                         <input type="password" name="password" id="password" placeholder="password"><br>
                         <input type="submit" id="Submit" value="LogIn" class="btn btn-common">

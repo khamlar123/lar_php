@@ -1,9 +1,11 @@
 <?php 
+    $api = 'rejectuser';
     $id = $_POST['id'];
     $data = array(
+        "api" => $api,
         "id" => $id,
     );
-    $ch = curl_init( 'http://localhost/my_project/API/RejectUser.php' );
+    $ch = curl_init( 'http://localhost/my_project/API/API.php' );
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
