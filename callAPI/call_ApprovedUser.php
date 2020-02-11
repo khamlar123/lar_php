@@ -1,4 +1,5 @@
 <?php 
+    include('../API/connect.php');
     $api = 'approveduser';
     $id = $_POST['id'];
     $name = $_POST['name'];
@@ -13,8 +14,26 @@
     $password = $_POST['password'];
     $role = $_POST['role'];
     $adminname = $_POST['adminname'];
+    $adminid = $_POST['adminid'];
+    $token = $_POST['token'];
 
-    
+    //check token//
+    if($token!=""){
+            $sql = "SELECT * FROM `tb_admin` where `adminid`= $adminid" ;
+            $res = mysqli_query($conn,$sql);
+            if(mysqli_query($conn, $sql)){
+                while($row = mysqli_fetch_array($res)){
+                    $checkToken = $row["token"];  
+                    if($checkToken !=  $token){
+                        echo 'check'.$checkToken;
+                        echo 'token'.$token;
+                        die;
+                    }
+                }
+            }
+    }
+    //end check token//
+
     $data = array(
         "api" => $api,
         "id" => $id,
@@ -30,6 +49,7 @@
         "password" => $password,
         "role" =>$role,
         "adminname" => $adminname,
+        "token"=>$token,
     );
  
     $ch = curl_init( 'http://localhost/my_project/API/API.php' );
@@ -52,4 +72,5 @@
         alert('Approved User Error');location='../view/home.php'
        </script>";
     }
+
 ?>

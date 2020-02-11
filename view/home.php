@@ -21,19 +21,20 @@
     // echo $_COOKIE["hisid"];
     // echo $_COOKIE["adminid"];
     // die;
+    $adminid = $_COOKIE["adminid"];
     if($_COOKIE["token"]==""){
 
         echo "<script>
         alert('plzz login!!');location='index.php';</script>";
     }else{   
-        $sql = "SELECT * FROM `tb_admin`" ;
+        $sql = "SELECT * FROM `tb_admin` where `adminid`= $adminid ";
         $res = mysqli_query($conn,$sql);
         if(mysqli_query($conn, $sql)){
             while($row = mysqli_fetch_array($res)){
                 // $data['token'] = $row["token"];
                 $checkToken = $row["token"];  
             }
-            if($_COOKIE["token"] == $checkToken){
+            if($_COOKIE["token"] != $checkToken){
                 echo "<script>
                 alert('plaa login');location='index.php';</script>"; 
             }else{	
@@ -137,7 +138,10 @@
                                 <li><a href="portfolio-details.html">Portfolio Details</a></li>
                             </ul>
                         </li>                         
-                        <li><a href="shortcodes.html ">Shortcodes</a></li>                    
+                        <!-- <li><a href="shortcodes.html ">Shortcodes</a></li>   -->
+                        <li><form action="../callAPI/call_logout.php" method="POST">
+                         <input type="submit" value="logout" class="btn btn-common">  
+                         </form> </li>                
                     </ul>
                 </div>
                 <div class="search">
@@ -170,6 +174,7 @@
     <!--/#page-breadcrumb-->
     <?php 
         foreach($json_userRequse['msg'] as $str => $data){ 
+            if(is_array($data)){
     ?>
     <section id="blog" class="padding-top">
         <div class="container">
@@ -203,6 +208,8 @@
                                                 <input type="text" name="password" value="<?php echo $data['password'] ?>" hidden >
                                                 <input type="text" name="img" value="<?php echo $data['img'] ?>" hidden >
                                                 <input type="text" name="adminname" value="<?php echo $_COOKIE["adminname"] ?>" hidden >
+                                                <input type="text" name="adminid" value="<?php echo $_COOKIE["adminid"] ?>" hidden >
+                                                <input type="text" name="token" value="<?php echo $_COOKIE["token"] ?>" hidden >
         
                                                 <input type="submit" id="Submit" value="Approved" class="btn btn-common">
                                             </form></li>
@@ -217,10 +224,9 @@
                                 </div>
                             </div>
                         </div>
-                     <a href="http://localhost/my_project/API/logout.php" >dsafdf</a>
-            
     </section>
-        <?php } ?>
+        <?php } 
+        }?>
     <!--/#blog-->
 
     <footer id="footer">

@@ -4,6 +4,40 @@ $data = array();
 $json = file_get_contents('php://input');
 $data = json_decode($json, TRUE);
 
+//check token //
+// if($data['status']=="admin"){
+//     $sql = "SELECT * FROM `tb_admin`" ;
+//     $res = mysqli_query($conn,$sql);
+//     if(mysqli_query($conn, $sql)){
+//         while($row = mysqli_fetch_array($res)){
+//             // $data['token'] = $row["token"];
+//             $checkToken = $row["token"];  
+//         }
+//         if($data['token']!= $checkToken){
+//             $output['code'] = '201';
+//             $output['msg'] = 'error call ';
+//             echo json_encode($output);
+//             die;
+//         }
+//     }else{
+//         $sql = "SELECT * FROM `tb_user`" ;
+//         $res = mysqli_query($conn,$sql);
+//         if(mysqli_query($conn, $sql)){
+//             while($row = mysqli_fetch_array($res)){
+//                 // $data['token'] = $row["token"];
+//                 $checkToken = $row["token"];  
+//             }
+//             if($data['token']!= $checkToken){
+//                 $output['code'] = '201';
+//                 $output['msg'] = 'error call ';
+//                 echo json_encode($output);
+//                 die;
+//             }
+//         }
+//     }
+// }
+//end check token//
+
     if($data['api']=="getuserreques"){
         $data = array();
         // $dataRe = arrary();
