@@ -305,7 +305,9 @@ $data = json_decode($json, TRUE);
         $dataRe = array();
         $json = file_get_contents('php://input');
         $data = json_decode($json, TRUE);
-    
+
+        // var_dump($data);
+        // die;
         $name = $data['name'];
         $lname = $data['lname'];
         $email = $data['email'];
@@ -319,14 +321,19 @@ $data = json_decode($json, TRUE);
         $village = $data['village'];
         $city = $data['city'];
         $provice = $data['province'];
-    
+        
         $sql ="INSERT INTO `tb_userReques`(`name`, `lname`, `email`, `password`, `phone`,  `create`, `img`, `role`, `Village`, `City`, `Province`)
                  VALUES ('$name', '$lname', '$email', '$password', '$phone',  '$create', '$img', '$role', '$village', '$city', '$provice')";
+               
         if(mysqli_query($conn, $sql)){
             // echo 'ok';
+            // die;
             $output['code'] = '200';
             $output['msg'] = $data;
             echo json_encode($output);
+            // echo 'lol';
+            // die;
+           
         }else{
             $output['code'] = '201';
             $output['msg'] = 'add user error';
@@ -373,26 +380,4 @@ $data = json_decode($json, TRUE);
         }
     }   
 
-    if($data['api']=="logout"){
-        $token=$_COOKIE["token"];
-    $historyid=$_COOKIE["hisid"];
-    $adminid= $_COOKIE["adminid"];
-
-        date_default_timezone_set("Asia/Bangkok");
-        $logout=date("Y-m-d H:i:s");
-        $sql ="UPDATE `tb_hitory` SET `logoutDate`='$logout' WHERE `id`=$historyid";
- 
-        if(mysqli_query($conn, $sql)){
-            setcookie( "token", "", time()- 60, "/","", 0);
-            setcookie( "hisid", "", time()- 60, "/","", 0);
-            setcookie( "adminid", "", time()- 60, "/","", 0);
-            // setcookie( "adminname", "", time()- 60, "/","", 0);
-            // setcookie( "userid", "", time()- 60, "/","", 0);
-            // setcookie( "username", "", time()- 60, "/","", 0);
-            header("location:../view/index.php");
-        }else{
-            echo 'logout error';
-            header("location:../view/404.php");
-        }
-    }
 ?>

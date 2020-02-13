@@ -18,10 +18,14 @@
              setcookie( "adminname", "", time()- 60, "/","", 0);
              setcookie( "userid", "", time()- 60, "/","", 0);
              setcookie( "username", "", time()- 60, "/","", 0);
-             header("location:../view/index.php");
+             echo "<script>
+             alert('are you sure logout?');location='../index.php';</script>";
+            //  header("location:../view/index.php");
   
          }else{
-             echo 'logout error';
+            $output['code']='201';
+            $output['msg']= 'logout error';
+            echo json_encode($output);
              header("location:../view/404.php");
          }
 ?>

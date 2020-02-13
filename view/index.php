@@ -13,6 +13,8 @@
     <link href="css/responsive.css" rel="stylesheet">
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!--[if lt IE 9]>
@@ -121,7 +123,10 @@
                         <input type="text" name="email" id="email" placeholder="Email"><br>
                         <input type="password" name="password" id="password" placeholder="password"><br>
                         <input type="submit" id="Submit" value="LogIn" class="btn btn-common">
+                        <a href="register.php"  class="btn btn-common">Register</a>
+                        <!-- <input type="submit" id="register"  value="register" class="btn btn-common"> -->
                     </form>
+
                 </div>
                 <img src="images/home/slider/slide1/house.png" class="img-responsive slider-house" alt="slider image">
                 <img src="images/home/slider/slide1/circle1.png" class="slider-circle1" alt="slider image">

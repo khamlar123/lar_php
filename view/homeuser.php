@@ -24,6 +24,8 @@
             }
         }
 ?>  
- wellcom to the user home 
+ wellcom to the user home <li><form action="../callAPI/call_logout.php" method="POST">
+                         <input type="submit" value="logout" class="btn btn-common">  
+                         </form> </li>                
 
     <?php } ?>
