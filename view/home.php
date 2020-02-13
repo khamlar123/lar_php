@@ -186,12 +186,12 @@
                                 <div class="post-content overflow">
                                     <h2 class="post-title bold">Name: <?php echo $data['name'] ?>  <?php echo $data['lname'] ?></h2>
                                     <h3 class="post-author">ID: <?php echo $data['id'] ?></h3>
-                                   <p><?php echo "<img src='../img/".$data['img']."' style='width:50px; height:50px;'>" ?> Email: <?php echo $data['email'] ?>, Password:<?php echo $data['password'] ?>, Phone: <?php echo $data['phone'] ?>, Create: <?php echo $data['create'] ?>,
+                                   <p><?php echo "<a href='../img/".$data['img']."'  target='_blank'><img src='../img/".$data['img']."' style='width:50px; height:50px;'></a>" ?> Email: <?php echo $data['email'] ?>, Password:<?php echo $data['password'] ?>, Phone: <?php echo $data['phone'] ?>, Create: <?php echo $data['create'] ?>,
                                    Village: <?php echo $data['village'] ?>, Ctiy: <?php echo $data['city'] ?>, Province: <?php echo $data['province'] ?>
                                     Role:  <?php echo $data['role'] ?>
                                 </p>
 
-                               <?php echo "<a href='http://localhost/my_project/img/".$data['img']."'  target='_top'>View Profile</a> "?>
+                               <!-- <?php echo "<a href='../img/".$data['img']."'  target='_blank'>View Profile</a> "?> -->
                               
                                     <div class="post-bottom overflow">
                                         <ul class="nav navbar-nav post-nav">

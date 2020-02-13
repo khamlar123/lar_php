@@ -13,9 +13,7 @@
 
 
 
-        if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_dir.$p)) {
-            // print "Uploaded successfully!";
-         }
+      
         $village = $_POST['village'];
         $city = $_POST['city'];
         $province = $_POST['province'];
@@ -51,6 +49,7 @@
         //  echo  $json_data['code'];
         //  die;
         if($json_data['code']==200){
+            move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_dir.$p);
             echo "<script>
              alert('Register user comple plz Wait admin check information ');location='../index.php';</script>";
         }else{
