@@ -158,6 +158,7 @@ $data = json_decode($json, TRUE);
         $login=date("Y-m-d H:i:s");
     
         if($email!=""){
+            // $sql = "SELECT * FROM `tb_admin` WHERE `email`='$email' or `adminname`='$email'" ; user email or user name  for login
             $sql = "SELECT * FROM `tb_admin` WHERE `email`='$email'" ;
             $res = mysqli_query($conn,$sql);
             if(mysqli_query($conn, $sql)){
@@ -267,7 +268,7 @@ $data = json_decode($json, TRUE);
         die;
     }
 
-    if($data['api'] == "adduser"){
+    if($data['api'] == "register"){
         $data = array();
         $dataRe = array();
         $json = file_get_contents('php://input');

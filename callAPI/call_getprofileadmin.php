@@ -1,6 +1,12 @@
 <?php 
+//no show error//
+  error_reporting (E_ALL ^ E_NOTICE);
+//end no show error//
+
         $api = 'getprofileadmin';
+
         if($_COOKIE["adminid"] !="" && $_COOKIE["token"] !=""){
+          
         $adminid = $_COOKIE["adminid"];
         $token = $_COOKIE["token"];
     	$data = array(
@@ -20,6 +26,7 @@
             // die;
             // echo $json_data['msg']['name'];
         }else{
+            
             echo "<script>
                 alert('plzz login!!');location='../view/index.php';</script>";
         } 

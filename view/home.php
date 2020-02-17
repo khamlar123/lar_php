@@ -22,12 +22,13 @@
     // echo $_COOKIE["adminid"];
     // die;
     
-    $adminid = $_COOKIE["adminid"];
+   
     if($_COOKIE["token"]==""){
 
         echo "<script>
         alert('plzz login!!');location='index.php';</script>";
     }else{   
+        $adminid = $_COOKIE["adminid"];
         $sql = "SELECT * FROM `tb_admin` where `adminid`= $adminid ";
         $res = mysqli_query($conn,$sql);
         if(mysqli_query($conn, $sql)){

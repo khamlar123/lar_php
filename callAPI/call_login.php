@@ -13,7 +13,6 @@
             "password" => $password,
 
         );
-
         // echo json_encode($data);
         // die;
         $ch = curl_init( 'http://localhost/my_project/API/API.php' );
@@ -31,22 +30,19 @@
            
             
         //     echo $_SESSION['token'];
-        setcookie("token", $json_data['msg']['token'], time()+3600, "/","", 0); 
-        setcookie("hisid", $json_data['msg']['historyid'], time()+3600, "/","", 0);
-
-        if($json_data['code']=='200 user'){
-            setcookie("userid", $json_data['msg']['userid'], time()+3600, "/","", 0);
-            setcookie("username", $json_data['msg']['username'], time()+3600, "/","", 0);
        
-        }else{
-            setcookie("adminid", $json_data['msg']['id'], time()+3600, "/","", 0);
-            setcookie("adminname", $json_data['msg']['name'], time()+3600, "/","", 0);
-        }
             if($json_data['code'] == '200'){
-           
+                setcookie("adminid", $json_data['msg']['id'], time()+ (86400 * 30), "/","", 0);
+                setcookie("adminname", $json_data['msg']['name'], time()+ (86400 * 30), "/","", 0);
+                setcookie("token", $json_data['msg']['token'], time()+ (86400 * 30), "/","", 0); 
+                setcookie("hisid", $json_data['msg']['historyid'], time()+ (86400 * 30), "/","", 0);
                 header('location:../view/home.php');
                 
             }elseif($json_data['code']=='200 user'){
+                setcookie("userid", $json_data['msg']['userid'], time()+ (86400 * 30), "/","", 0);
+                setcookie("username", $json_data['msg']['username'], time()+ (86400 * 30), "/","", 0);
+                setcookie("token", $json_data['msg']['token'], time()+ (86400 * 30), "/","", 0); 
+                setcookie("hisid", $json_data['msg']['historyid'], time()+ (86400 * 30), "/","", 0);
                 header('location:../view/homeuser.php');
             }else{
                 echo "<script>

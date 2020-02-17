@@ -1,25 +1,59 @@
 <?php 
-       $api = "adduser";
+    include('../API/connect.php');
+       $api = "register";
         $name = $_POST['name'];
         $lname = $_POST['lname'];
         $email = $_POST['email'];
         $password = $_POST['password'];
         $phone = $_POST['phone'];
-
         $p =$_FILES['fileToUpload']['name'];
         $target_dir = "../img/";
         $target_file = $target_dir. basename($_FILES["fileToUpload"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
-
-
-      
         $village = $_POST['village'];
         $city = $_POST['city'];
         $province = $_POST['province'];
         $role = 'user';
 
-      
+          //check email addmin//
+          if($email!=""){
+            $sql = "SELECT * FROM `tb_admin`where  `email` ='$email' " ;
+            $res = mysqli_query($conn,$sql);
+            if(mysqli_query($conn, $sql)){
+                while($row = mysqli_fetch_array($res)){
+                    $checkemail = $row["email"];  
+                    // echo $checkemail;
+                    // die;
+                    if($checkemail == $email){
+                        echo "<script>
+                                alert('your email have already');location='../view/register.php'
+                              </script>";
+                        die;
+                    }
+                }
+            }
+        }
+         //end check email admin//
+
+         //check email user//
+         if($email!=""){
+            $sql = "SELECT * FROM `tb_user`where  `email` ='$email' " ;
+            $res = mysqli_query($conn,$sql);
+            if(mysqli_query($conn, $sql)){
+                while($row = mysqli_fetch_array($res)){
+                    $checkemail = $row["email"];  
+                    // echo $checkemail;
+                    // die;
+                    if($checkemail == $email){
+                        echo "<script>
+                                alert('your email have already');location='../view/register.php'
+                              </script>";
+                        die;
+                    }
+                }
+            }
+        }
+         //end check email user //
 
        $data = array(
            "api" => $api,
