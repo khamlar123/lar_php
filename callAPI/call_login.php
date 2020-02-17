@@ -31,7 +31,7 @@
            
             
         //     echo $_SESSION['token'];
-        setcookie("token", $json_data['msg']['token'], time()+3600, "/","", 0);
+        setcookie("token", $json_data['msg']['token'], time()+3600, "/","", 0); 
         setcookie("hisid", $json_data['msg']['historyid'], time()+3600, "/","", 0);
 
         if($json_data['code']=='200 user'){

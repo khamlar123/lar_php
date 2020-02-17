@@ -25,8 +25,9 @@
                 while($row = mysqli_fetch_array($res)){
                     $checkToken = $row["token"];  
                     if($checkToken !=  $token){
-                        echo 'check'.$checkToken;
-                        echo 'token'.$token;
+                        echo "<script>
+                                alert('Approved User Error');location='../view/home.php'
+                              </script>";
                         die;
                     }
                 }

@@ -1,8 +1,8 @@
 <?php 
         $api = 'getprofileadmin';
+        if($_COOKIE["adminid"] !="" && $_COOKIE["token"] !=""){
         $adminid = $_COOKIE["adminid"];
         $token = $_COOKIE["token"];
-        if($adminid && $token != ""){
     	$data = array(
             "api" => $api,
             "adminid" => $adminid
@@ -15,7 +15,7 @@
         $json_data = json_decode($return, true);
         $curl_error = curl_error($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            // echo json_encode($json_data)
+            // echo json_encode($json_data);
             // echo json_encode($data);
             // die;
             // echo $json_data['msg']['name'];

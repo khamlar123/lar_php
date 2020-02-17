@@ -1,53 +1,26 @@
-<?php 
-    include('../API/connect.php');
-    include('../callAPI/call_getprofileadmin.php');
-    include('../callAPI/call_getuserRequse.php');
-    // include('../callAPI/call_ApprovedUser.php');
-    
-    // echo $_COOKIE["token"];
-    // die;
-    // echo $_COOKIE["token"];
-	// session_start();
-    // @$adminid=$_SESSION['adminid'];
-    // echo'adminid'. $adminid;
-    // @$historyid=$_SESSION['hisid'];
-    // echo 'historyid'. $historyid;
-    // @$token=$_SESSION['token'];
-    // echo 'token'. $token."</br>";
 
-    // setcookie( "token", "", time()- 60, "/","", 0);
-    // die;
-    // echo $_COOKIE["token"];
-    // echo $_COOKIE["hisid"];
-    // echo $_COOKIE["adminid"];
-    // die;
-    
-    $adminid = $_COOKIE["adminid"];
-    if($_COOKIE["token"]==""){
+<?php include('../callAPI/call_getuser.php'); 
+  include('../callAPI/call_getprofileadmin.php');
+  include('../callAPI/call_getuserRequse.php');
 
-        echo "<script>
-        alert('plzz login!!');location='index.php';</script>";
-    }else{   
-        $sql = "SELECT * FROM `tb_admin` where `adminid`= $adminid ";
-        $res = mysqli_query($conn,$sql);
-        if(mysqli_query($conn, $sql)){
-            while($row = mysqli_fetch_array($res)){
-                // $data['token'] = $row["token"];
-                $checkToken = $row["token"];  
-            }
-            if($_COOKIE["token"] != $checkToken){
-                echo "<script>
-                alert('plaa login');location='index.php';</script>"; 
-            }else{	
-                // echo 'login now';
-            //     echo $_COOKIE["adminid"];
-            // echo $_COOKIE["adminname"];
-            
-            }
-        }
-  
-
+  $adminid = $_COOKIE["adminid"];
+  if($_COOKIE["token"]==""){
+      echo "<script>
+      alert('plzz login!!');location='index.php';</script>";
+  }else{   
+      $sql = "SELECT * FROM `tb_admin` where `adminid`= $adminid ";
+      $res = mysqli_query($conn,$sql);
+      if(mysqli_query($conn, $sql)){
+          while($row = mysqli_fetch_array($res)){
+              $checkToken = $row["token"];  
+          }
+          if($_COOKIE["token"] != $checkToken){
+              echo "<script>
+              alert('plaa login');location='index.php';</script>"; 
+          }
+      }
 ?>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,18 +32,13 @@
     <link href="css/lightbox.css" rel="stylesheet"> 
     <link href="css/animate.min.css" rel="stylesheet"> 
 	<link href="css/main.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
-
-    <!--[if lt IE 9]>
-	    <script src="js/html5shiv.js"></script>
-	    <script src="js/respond.min.js"></script>
-    <![endif]-->       
+	<link href="css/responsive.css" rel="stylesheet">    
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-</head><!--/head-->
+</head>
 
 <body>
 	<header id="header">      
@@ -139,7 +107,6 @@
                                 <li><a href="portfolio-details.html">Portfolio Details</a></li>
                             </ul>
                         </li>                         
-                        <!-- <li><a href="shortcodes.html ">Shortcodes</a></li>   -->
                         <li><form action="../callAPI/call_logout.php" method="POST">
                          <input type="submit" value="logout" class="btn btn-common">  
                          </form> </li>                
@@ -164,7 +131,7 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">User Reques</h1>
+                            <h1 class="title">History login</h1>
                             <!-- <p>Blog with right sidebar</p> -->
                         </div>
                     </div>
@@ -173,67 +140,61 @@
         </div>
    </section>
     <!--/#page-breadcrumb-->
-    <?php 
-        foreach($json_userRequse['msg'] as $str => $data){ 
-            if(is_array($data)){
-    ?>
-    <section id="blog" class="padding-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9 col-sm-7">
-                    <div class="row">
-                         <div class="col-sm-12 col-md-12">
-                            <div class="single-blog single-column"> 
-                                <div class="post-content overflow">
-                                    <h2 class="post-title bold">Name: <?php echo $data['name'] ?>  <?php echo $data['lname'] ?></h2>
-                                    <h3 class="post-author">ID: <?php echo $data['id'] ?></h3>
-                                   <p><?php echo "<a href='../img/".$data['img']."'  target='_blank'><img src='../img/".$data['img']."' style='width:50px; height:50px;'></a>" ?> Email: <?php echo $data['email'] ?>, Password:<?php echo $data['password'] ?>, Phone: <?php echo $data['phone'] ?>, Create: <?php echo $data['create'] ?>,
-                                   Village: <?php echo $data['village'] ?>, Ctiy: <?php echo $data['city'] ?>, Province: <?php echo $data['province'] ?>
-                                    Role:  <?php echo $data['role'] ?>
-                                </p>
 
-                               <!-- <?php echo "<a href='../img/".$data['img']."'  target='_blank'>View Profile</a> "?> -->
-                              
-                                    <div class="post-bottom overflow">
-                                        <ul class="nav navbar-nav post-nav">
-                                            <!-- <li><a href="#"><i class="fa fa-tag"></i>Reject</a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i>Approved</a></li> -->
-                                           <li> <form action="../callAPI/call_ApprovedUser.php" method="POST">
-                                                <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden >
-                                                <input type="text" name="name" value="<?php echo $data['name'] ?>" hidden >
-                                                <input type="text" name="lname" value="<?php echo $data['lname'] ?>" hidden >
-                                                <input type="text" name="email" value="<?php echo $data['email'] ?>" hidden >
-                                                <input type="text" name="phone" value=" <?php echo $data['phone'] ?>" hidden >
-                                                <input type="text" name="create" value=" <?php echo $data['create'] ?>" hidden >
-                                                <input type="text" name="village" value="<?php echo $data['village'] ?>" hidden >
-                                                <input type="text" name="city" value="<?php echo $data['city'] ?>" hidden >
-                                                <input type="text" name="province" value="<?php echo $data['province'] ?>" hidden >
-                                                <input type="text" name="role" value="<?php echo $data['role'] ?>" hidden >
-                                                <input type="text" name="password" value="<?php echo $data['password'] ?>" hidden >
-                                                <input type="text" name="img" value="<?php echo $data['img'] ?>" hidden >
-                                                <input type="text" name="adminname" value="<?php echo $_COOKIE["adminname"] ?>" hidden >
-                                                <input type="text" name="adminid" value="<?php echo $_COOKIE["adminid"] ?>" hidden >
-                                                <input type="text" name="token" value="<?php echo $_COOKIE["token"] ?>" hidden >
-        
-                                                <input type="submit" id="Submit" value="Approved" class="btn btn-common">
-                                            </form></li>
+    <center><form action="../callAPI/call_gethistory.php" method="POST">
+        <!-- select name -->
+            <select name='userid' class="btn btn-common">
+				<option value="">-- Select User Name --</option>
+                <?php 
+                    foreach($json_user['msg'] as $str => $data){ 
+                        if(is_array($data)){?>
+                            <option value="<?php echo $data['id'] ?>"><?php echo $data['name'] ?></option>
+                <?php }}?>
+			</select>
+            <!-- end select name -->
 
-                                            <li> <form action="../callAPI/call_RejectUser.php" method="POST">
-                                                <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden >
-                                                <input type="submit" id="Submit" value="Reject" class="btn btn-common">
-                                            </form></li>
-                                            <!-- <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li> -->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    </section>
-        <?php } 
-        }?>
-    <!--/#blog-->
+            <!-- select yera -->
+            <select name="year" class="btn btn-common">
+                <option value="">-- Select Year --</option>
+                <?php 
+                    $datey = date("Y"); 
+                    $d = 2017;
+                    while($d <= $datey) 
+                {?>
+                    <option value="<?php echo $d;?>"><?php echo $d ;?></option>
+                <?php $d++; }?>
+            </select>
+            <!-- end select yera -->
 
-    <footer id="footer">
+            <!-- select months -->
+            <select name="months" class="btn btn-common">
+                <option value="">-- Select Months --</option>
+                <?php 
+                $i=0;	
+                    for($i = 1; $i < 13; $i++) {
+                        $i = str_pad($i, 2, '0', STR_PAD_LEFT);
+                ?>
+                    <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                <?php } ?>
+            </select>
+            <!-- end select months -->
+
+            <!-- select day -->
+            <select name="day" class="btn btn-common">
+                <option value="">-- Select Months --</option>
+                <?php 
+                    $i=0;	
+                    for($i = 1; $i < 32; $i++) {
+                        $i = str_pad($i, 2, '0', STR_PAD_LEFT); 
+                ?>
+                     <option value="<?php echo $i ?>"><?php echo $i ?></option>
+                <?php } ?>
+            </select>
+            <!-- end select day -->
+            <input type="submit" value="show" class="btn btn-common">
+    </form> </center>
+    
+        <footer id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center bottom-separator">
@@ -267,7 +228,6 @@
                        
                     </div>
                 </div>
-                
                 <div class="col-md-4 col-sm-12">
                     <div class="contact-form bottom">
                     <h2>Address</h2>
@@ -297,8 +257,7 @@
     <script type="text/javascript" src="js/main.js"></script>   
 </body>
 </html>
+
 <?php 
     }
 ?>
-
-

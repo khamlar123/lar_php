@@ -4,39 +4,6 @@ $data = array();
 $json = file_get_contents('php://input');
 $data = json_decode($json, TRUE);
 
-//check token //
-// if($data['status']=="admin"){
-//     $sql = "SELECT * FROM `tb_admin`" ;
-//     $res = mysqli_query($conn,$sql);
-//     if(mysqli_query($conn, $sql)){
-//         while($row = mysqli_fetch_array($res)){
-//             // $data['token'] = $row["token"];
-//             $checkToken = $row["token"];  
-//         }
-//         if($data['token']!= $checkToken){
-//             $output['code'] = '201';
-//             $output['msg'] = 'error call ';
-//             echo json_encode($output);
-//             die;
-//         }
-//     }else{
-//         $sql = "SELECT * FROM `tb_user`" ;
-//         $res = mysqli_query($conn,$sql);
-//         if(mysqli_query($conn, $sql)){
-//             while($row = mysqli_fetch_array($res)){
-//                 // $data['token'] = $row["token"];
-//                 $checkToken = $row["token"];  
-//             }
-//             if($data['token']!= $checkToken){
-//                 $output['code'] = '201';
-//                 $output['msg'] = 'error call ';
-//                 echo json_encode($output);
-//                 die;
-//             }
-//         }
-//     }
-// }
-//end check token//
 
     if($data['api']=="getuserreques"){
         $data = array();
@@ -380,4 +347,82 @@ $data = json_decode($json, TRUE);
         }
     }   
 
+    if($data['api'] == "gethistory"){
+        $data = array();
+        $dataRe= array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+    
+        $userid = $data['userid'];
+        $year =$data['year'];
+        $months = $data['months'];
+        $day = $data['day'];
+
+        // echo $day;
+        // echo json_encode($data);
+        // die;
+    
+            if($userid !== ""){
+                $sql = "SELECT `name`, `lastname` FROM `tb_user` WHERE `userid` = $userid ";
+                $res = (mysqli_query($conn, $sql));
+                if(mysqli_query($conn, $sql)){
+                    while($row = mysqli_fetch_array($res)){
+                        $dataRe['username'] = $row["name"].$row["lastname"];
+                    }
+                }
+            }
+            // year + months + day//
+                $ymd = $year."-".$months."-".$day;
+                $sql = "SELECT * FROM `tb_hitory` where `userId`= $userid and `loginDate` like '$ymd%'";
+                // echo $sql;
+                // die;
+                $res = (mysqli_query($conn, $sql));
+                if(mysqli_query($conn, $sql)){
+                    while($row = mysqli_fetch_array($res)){
+                        $sup = array();
+                        $sup['hisid'] = $row["id"];
+                        $sup['logindate'] = $row["loginDate"];
+                        $sup['logoutdate'] = $row["logoutDate"];
+                        $dataRe[] = $sup;
+                  
+                    }
+                    $output['code'] = '200';
+                    $output['msg'] = $dataRe;
+                    echo json_encode($output);
+                }else{
+                    $output['code'] = '201';
+                    $output['msg'] = 'error';
+                    echo json_encode($output);
+                    die;
+                }
+            //end year + months + day//
+    }
+
+    if($data['api']=="getuser"){
+        $data = array();
+        // $dataRe = arrary();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+
+        $sql = "SELECT * FROM `tb_user`";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_query($conn, $sql)){
+            while($row = mysqli_fetch_Array($res)){
+                $sub = array();
+                $sub['id'] = $row["userid"]; 
+                $sub['name'] = $row["name"]; 
+         
+               
+                $data[] = $sub;               
+            }
+            $output['code'] = '200';
+            $output['msg'] = $data;
+            echo json_encode($output);
+            die;
+        }else{
+        $output['code'] = '201';
+        $output['msg'] = 'error';
+        echo json_encode($output);
+        }
+    }
 ?>
