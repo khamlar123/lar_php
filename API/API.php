@@ -165,6 +165,8 @@ $data = json_decode($json, TRUE);
                 while($row = mysqli_fetch_array($res)){
                     $dataRe['id'] = $row["adminid"];
                     $dataRe['name'] = $row["adminname"];
+                    $dataRe['telegramToken'] = $row["telegramtoken"];
+                    $dataRe['telegramid'] = $row["telegramid"];
                     $pass = $row["password"];
                     $id = $row["adminid"];  
                     //check password

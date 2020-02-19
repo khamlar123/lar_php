@@ -86,6 +86,15 @@
             move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_dir.$p);
             echo "<script>
              alert('Register user comple plz Wait admin check information ');location='../index.php';</script>";
+             $tokentelegram = "914144499:AAGQ7JlxaN0PZd3yT2G-kBdywKRjLwnz-G4";
+             $user_id = 1020975496;
+             $mesg = 'ມີການສະມັກຜູໃຊ້ຊື່:'.$name." ".$lname;
+             $data =[
+                 'chat_id' => $user_id,
+                 'text' => $mesg
+             ]; 
+             $url = 'https://api.telegram.org/bot'.$tokentelegram.'/sendMessage?'. http_build_query($data);
+             file_get_contents($url);
         }else{
             echo "<script>
             alert('Register user error');location='../view/register.php';</script>";

@@ -4,6 +4,8 @@
         $api = 'login';
         $email =$_POST['email'];
         $password =$_POST['password'];
+        date_default_timezone_set("Asia/Bangkok");
+        $date=date("Y-m-d H:i:s");
 
 
         if($email !=""){
@@ -24,7 +26,7 @@
         $curl_error = curl_error($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             // echo json_encode($json_data);
-            //  echo  $json_data['msg']['token'];
+            //  echo  $json_data['msg']['telegramid'];
             // die;
 
            
@@ -36,13 +38,43 @@
                 setcookie("adminname", $json_data['msg']['name'], time()+ (86400 * 30), "/","", 0);
                 setcookie("token", $json_data['msg']['token'], time()+ (86400 * 30), "/","", 0); 
                 setcookie("hisid", $json_data['msg']['historyid'], time()+ (86400 * 30), "/","", 0);
+                setcookie("telegamtoken", $json_data['msg']['telegramToken'], time()+ (86400 * 30), "/","", 0); 
+                setcookie("telegamidid", $json_data['msg']['telegramid'], time()+ (86400 * 30), "/","", 0);
+                $telegamtoken = $json_data['msg']['telegramToken'];
+                $telegamid = $json_data['msg']['telegramid'];
+                if($telegamtoken =="" && $telegamid ==""){
+                    header('location:../view/home.php');
+                }else{
+                    $tokentelegram = $telegamtoken;
+                    $user_id = $telegamid;
+                    $mesg = 'ທ່ານເຂົ້າສູລະບົບ'.$date;
+                    $data =[
+                        'chat_id' => $user_id,
+                        'text' => $mesg
+                    ]; 
+                    $url = 'https://api.telegram.org/bot'.$tokentelegram.'/sendMessage?'. http_build_query($data);
+                    file_get_contents($url);
+                    // echo $url;
+                    // die;
+                }
+                //end send message to telegram//
                 header('location:../view/home.php');
-                
             }elseif($json_data['code']=='200 user'){
                 setcookie("userid", $json_data['msg']['userid'], time()+ (86400 * 30), "/","", 0);
                 setcookie("username", $json_data['msg']['username'], time()+ (86400 * 30), "/","", 0);
                 setcookie("token", $json_data['msg']['token'], time()+ (86400 * 30), "/","", 0); 
                 setcookie("hisid", $json_data['msg']['historyid'], time()+ (86400 * 30), "/","", 0);
+
+                // $token = "1059536392:AAFGBhW9h7dXHPbH-nbzmr7PIzsowBvRYXc";
+                // $user_id= 1020975496;
+                // $mesg = 'have login';
+                // $request_params =[
+                //     'chat_id' => $user_id,
+                //     'text' => $mesg
+                // ]; 
+                // $request_url = 'https://api.telegram.org/bot'.$token.'/sendMessage?'. http_build_query($request_params);
+                // file_get_contents($request_url);
+
                 header('location:../view/homeuser.php');
             }else{
                 echo "<script>
