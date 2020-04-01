@@ -2,27 +2,7 @@
     include('../API/connect.php');
     include('../callAPI/call_getprofileadmin.php');
     include('../callAPI/call_getuserRequse.php');
-    // include('../callAPI/call_ApprovedUser.php');
-    
-    // echo $_COOKIE["token"];
-    // die;
-    // echo $_COOKIE["token"];
-	// session_start();
-    // @$adminid=$_SESSION['adminid'];
-    // echo'adminid'. $adminid;
-    // @$historyid=$_SESSION['hisid'];
-    // echo 'historyid'. $historyid;
-    // @$token=$_SESSION['token'];
-    // echo 'token'. $token."</br>";
-
-    // setcookie( "token", "", time()- 60, "/","", 0);
-    // die;
-    // echo $_COOKIE["token"];
-    // echo $_COOKIE["hisid"];
-    // echo $_COOKIE["adminid"];
-    // die;
-    
-   
+       
     if($_COOKIE["token"]==""){
 
         echo "<script>
@@ -38,16 +18,10 @@
             }
             if($_COOKIE["token"] != $checkToken){
                 echo "<script>
-                alert('plaa login');location='index.php';</script>"; 
-            }else{	
-                // echo 'login now';
-            //     echo $_COOKIE["adminid"];
-            // echo $_COOKIE["adminname"];
-            
+                alert('ກະລຸນາເຂົ້າສູລະບົບກ່ອນ');location='index.php';</script>"; 
+            }else{	            
             }
         }
-  
-
 ?>
 <head>
     <meta charset="utf-8">
@@ -62,16 +36,13 @@
 	<link href="css/main.css" rel="stylesheet">
 	<link href="css/responsive.css" rel="stylesheet">
 
-    <!--[if lt IE 9]>
-	    <script src="js/html5shiv.js"></script>
-	    <script src="js/respond.min.js"></script>
-    <![endif]-->       
+
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-</head><!--/head-->
+</head>
 
 <body>
 	<header id="header">      
@@ -107,10 +78,10 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="home.php">Home</a></li>
-                        <li class="dropdown"><a href="#">Pages <i class="fa fa-angle-down"></i></a>
+                        <li><a href="home.php">ໜ້າຫຼັກ</a></li>
+                        <li class="dropdown"><a href="#">ຈັດການຂໍ້ມູນພະນັກງານ<i class="fa fa-angle-down"></i></a>
                             <ul role="menu" class="sub-menu">
-                                <li><a href="history.php">History Login</a></li>
+                                <li><a href="history.php">ກວດສອບການເຂົ້າວຽກ</a></li>
                                 <li><a href="aboutus2.html">About 2</a></li>
                                 <li><a href="service.html">Services</a></li>
                                 <li><a href="pricing.html">Pricing</a></li>
@@ -129,28 +100,18 @@
                                 <li><a href="blogfour.html">Blog Masonary</a></li>
                                 <li><a href="blogdetails.html">Blog Details</a></li>
                             </ul>
-                        </li>
-                        <li class="dropdown"><a href="portfolio.html">Portfolio <i class="fa fa-angle-down"></i></a>
-                            <ul role="menu" class="sub-menu">
-                                <li><a href="portfolio.html">Portfolio Default</a></li>
-                                <li><a href="portfoliofour.html">Isotope 3 Columns + Right Sidebar</a></li>
-                                <li><a href="portfolioone.html">3 Columns + Right Sidebar</a></li>
-                                <li><a href="portfoliotwo.html">3 Columns + Left Sidebar</a></li>
-                                <li><a href="portfoliothree.html">2 Columns</a></li>
-                                <li><a href="portfolio-details.html">Portfolio Details</a></li>
-                            </ul>
-                        </li>                         
-                        <!-- <li><a href="shortcodes.html ">Shortcodes</a></li>   -->
-                        <li><form action="../callAPI/call_logout.php" method="POST">
-                         <input type="submit" value="logout" class="btn btn-common">  
-                         </form> </li>                
+                        </li>                      
+                        <li><a href="../callAPI/call_logout.php">ອອກຈາກລະບົບ</a></li>  
+                        <!-- <li><form action="../callAPI/call_logout.php" method="POST">
+                         <input type="submit" value="ອອກຈາກລະບົບ" class="btn btn-common">  
+                         </form> </li>                 -->
                     </ul>
                 </div>
                 <div class="search">
                     <form role="form">
                         <i class="fa fa-search"></i>
                         <div class="field-toggle">
-                            <input type="text" class="search-form" autocomplete="off" placeholder="Search">
+                            <input type="text" class="search-form" autocomplete="off" placeholder="Search" name="Sname" id="myInput">
                         </div>
                     </form>
                 </div>
@@ -165,76 +126,73 @@
                 <div class="row">
                     <div class="action">
                         <div class="col-sm-12">
-                            <h1 class="title">User Reques</h1>
-                            <!-- <p>Blog with right sidebar</p> -->
+                            <h2 class="title">ຄໍາຮ້ອງຂໍສະມັກຂອງຜູ້ໃຊ້</h2>
+                          
                         </div>
                     </div>
                 </div>
             </div>
         </div>
    </section>
-    <!--/#page-breadcrumb-->
-    <?php 
-        foreach($json_userRequse['msg'] as $str => $data){ 
-            if(is_array($data)){
-    ?>
-    <section id="blog" class="padding-top">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9 col-sm-7">
-                    <div class="row">
-                         <div class="col-sm-12 col-md-12">
-                            <div class="single-blog single-column"> 
-                                <div class="post-content overflow">
-                                    <h2 class="post-title bold">Name: <?php echo $data['name'] ?>  <?php echo $data['lname'] ?></h2>
-                                    <h3 class="post-author">ID: <?php echo $data['id'] ?></h3>
-                                   <p><?php echo "<a href='../img/".$data['img']."'  target='_blank'><img src='../img/".$data['img']."' style='width:50px; height:50px;'></a>" ?> Email: <?php echo $data['email'] ?>, Password:<?php echo $data['password'] ?>, Phone: <?php echo $data['phone'] ?>, Create: <?php echo $data['create'] ?>,
-                                   Village: <?php echo $data['village'] ?>, Ctiy: <?php echo $data['city'] ?>, Province: <?php echo $data['province'] ?>
-                                    Role:  <?php echo $data['role'] ?>
-                                </p>
 
-                               <!-- <?php echo "<a href='../img/".$data['img']."'  target='_blank'>View Profile</a> "?> -->
-                              
-                                    <div class="post-bottom overflow">
-                                        <ul class="nav navbar-nav post-nav">
-                                            <!-- <li><a href="#"><i class="fa fa-tag"></i>Reject</a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i>Approved</a></li> -->
-                                           <li> <form action="../callAPI/call_ApprovedUser.php" method="POST">
-                                                <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden >
-                                                <input type="text" name="name" value="<?php echo $data['name'] ?>" hidden >
-                                                <input type="text" name="lname" value="<?php echo $data['lname'] ?>" hidden >
-                                                <input type="text" name="email" value="<?php echo $data['email'] ?>" hidden >
-                                                <input type="text" name="phone" value=" <?php echo $data['phone'] ?>" hidden >
-                                                <input type="text" name="create" value=" <?php echo $data['create'] ?>" hidden >
-                                                <input type="text" name="village" value="<?php echo $data['village'] ?>" hidden >
-                                                <input type="text" name="city" value="<?php echo $data['city'] ?>" hidden >
-                                                <input type="text" name="province" value="<?php echo $data['province'] ?>" hidden >
-                                                <input type="text" name="role" value="<?php echo $data['role'] ?>" hidden >
-                                                <input type="text" name="password" value="<?php echo $data['password'] ?>" hidden >
-                                                <input type="text" name="img" value="<?php echo $data['img'] ?>" hidden >
-                                                <input type="text" name="adminname" value="<?php echo $_COOKIE["adminname"] ?>" hidden >
-                                                <input type="text" name="adminid" value="<?php echo $_COOKIE["adminid"] ?>" hidden >
-                                                <input type="text" name="token" value="<?php echo $_COOKIE["token"] ?>" hidden >
-        
-                                                <input type="submit" id="Submit" value="Approved" class="btn btn-common">
-                                            </form></li>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
-                                            <li> <form action="../callAPI/call_RejectUser.php" method="POST">
-                                                <input type="text" name="id" value="<?php echo $data['id'] ?>" hidden >
-                                                <input type="submit" id="Submit" value="Reject" class="btn btn-common">
-                                            </form></li>
-                                            <!-- <li><a href="#"><i class="fa fa-comments"></i>3 Comments</a></li> -->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-    </section>
-        <?php } 
-        }?>
-    <!--/#blog-->
+<table id="myTable" class="table table-striped" >  
+        <thead>  
+          <tr>  
+            <tr><th><h3>ລະຫັດ</h3></th>
+            <th><h3>ຮູບ</h3></th>
+            <th><h3>ຊື່</h3></th>
+            <th><h3>ນາມສະກຸນ</h3></th>
+            <th><h3>ເມສ</h3></th>
+            <th><h3>ລະຫັດ</h3></th>
+            <th><h3>ເບີໂທະສັບ</h3></th>
+            <th><h3>ວັນທີສະໝັກ</h3></th>
+            <th><h3>ບ້ານ<h3></th>
+            <th><h3>ເມືອງ</h3></th>
+            <th><h3>ແຂວງ<h3></th>
+            <th><h3>ສິດທິ</h3></th>
+            <th><h3>ຄໍາເຫັນ</h3></th>
+          </tr>  
+        </thead>  
+        <tbody> 
+        <?php 
+          foreach($json_userRequse['msg'] as $str => $data){ 
+              if(is_array($data)){
+        ?> 
+          <tr>  
+          <td> <?php echo $data['id'] ?></td>
+                <td><?php echo "<a href='../img/".$data['img']."'  target='_blank'><img src='../img/".$data['img']."' style='width:50px; height:50px;'></a>" ?></td>
+                <td><?php echo $data['name'] ?></td>
+                <td><?php echo $data['lname'] ?></td>
+                <td><?php echo $data['email'] ?></td>
+                <td><?php echo $data['password'] ?></td>
+                <td><?php echo $data['phone'] ?></td>
+                <td><?php echo $data['create'] ?></td>
+                <td><?php echo $data['village'] ?></td>
+                <td><?php echo $data['city'] ?></td>
+                <td><?php echo $data['province'] ?></td>
+                <td><?php echo $data['role'] ?></td>
+                <td><a href="../callAPI/call_ApprovedUser.php?id=<?php echo $data['id'] ?>&&name=<?php echo $data['name'] ?>&&img=<?php echo $data['img'] ?>&&
+                &&lname=<?php echo $data['lname'] ?>&&email=<?php echo $data['email'] ?>&&password=<?php echo $data['password'] ?>&&phone=<?php echo $data['phone'] ?>
+                &&create=<?php echo $data['create'] ?>&&village=<?php echo $data['village'] ?>&&city=<?php echo $data['city'] ?>&&province=<?php echo $data['province'] ?>
+                &&role=<?php echo $data['role'] ?>&&adminname=<?php echo $_COOKIE["adminname"] ?>&&adminid=<?php echo $_COOKIE["adminid"] ?>
+                &&token=<?php echo $_COOKIE["token"] ?>" >ອານຸມັດ</a> |
+                <a href="../callAPI/call_RejectUser.php?id=<?php echo $data['id'] ?>">ປະຕິເສດ</a></td>
+          </tr>  
+          <?php }}?>
+        </tbody>  
+      </table>  
+</body>  
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable();
+});
+</script>
 
-    <footer id="footer">
+
+<footer id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 text-center bottom-separator">
@@ -242,15 +200,15 @@
                 </div>
                 <div class="col-md-4 col-sm-6">
                     <div class="testimonial bottom">
-                        <h2>Testimonial</h2>
+                        <h2>ຂໍ້ມູນແອັດມີນ</h2>
                         <div class="media">
                             <div class="pull-left">
-                                <a href="#"><img src="images/home/profile1.png" alt=""></a>
+                               <a href="../img/<?php echo $json_data['msg']['img']; ?> " target="_blank"> <img src="../img/<?php echo $json_data['msg']['img']; ?>" style="width:100px; height:100px;"></a>
                             </div>
                             <div class="media-body">
-                              Name:  <?php echo $json_data['msg']['name']; ?><br>
-                               lastName: <?php echo $json_data['msg']['lname']; ?><br>
-                             Create: <?php echo $json_data['msg']['createDate']; ?>
+                              ຊື່:  <?php echo $json_data['msg']['name']; ?><br>
+                               ນາມສະກຸນ: <?php echo $json_data['msg']['lname']; ?><br>
+                             ວັນທີສ້າງ: <?php echo $json_data['msg']['createDate']; ?>
                                 <h3><a href="#">Edit Profile</a></h3>
                             </div>
                         </div>   
@@ -258,24 +216,22 @@
                 </div>
                 <div class="col-md-3 col-sm-6">
                     <div class="contact-info bottom">
-                        <h2>Contacts</h2>
+                        <h2>ຂໍ້ມູນຕິດຕໍ່</h2>
                         <address>
-                        E-mail: <a href="https://<?php echo $json_data['msg']['email'];?>"><?php echo $json_data['msg']['email'];  ?></a> <br> 
-                        Phone: <?php echo $json_data['msg']['phone'];  ?><br> 
-                        Whatapps: <?php echo $json_data['msg']['whatapps'];  ?>
+                        ອີເມສ: <a href="https://<?php echo $json_data['msg']['email'];?>"><?php echo $json_data['msg']['email'];  ?></a> <br> 
+                        ເບີໂທ: <?php echo $json_data['msg']['phone'];  ?><br> 
+                   
                         </address>
-
-                       
                     </div>
                 </div>
                 
                 <div class="col-md-4 col-sm-12">
                     <div class="contact-form bottom">
-                    <h2>Address</h2>
+                    <h2>ທີຢູ່</h2>
                         <address>
-                      <l> Provice:<l> <?php echo $json_data['msg']['Province'];?></br>
-                      <l> City:<l> <?php echo $json_data['msg']['City'];?></br>
-                       <l> Village:<l>  <?php echo $json_data['msg']['Village'];?>
+                      <l> ແຂວງ:<l> <?php echo $json_data['msg']['Province'];?></br>
+                      <l> ເມືອງ:<l> <?php echo $json_data['msg']['City'];?></br>
+                       <l> ບ້ານ:<l>  <?php echo $json_data['msg']['Village'];?>
                         </address>
                     </div>
                 </div>
@@ -289,15 +245,11 @@
         </div>
     </footer>
     <!--/#footer-->
-
-
-    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/validation.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/lightbox.min.js"></script>
     <script type="text/javascript" src="js/wow.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>   
-</body>
-</html>
+    <script type="text/javascript" src="js/main.js"></script>  
 <?php 
     }
 ?>

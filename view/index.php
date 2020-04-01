@@ -60,8 +60,8 @@
                     
                         <input  type="email" id="email" name="email" placeholder="Email"><br>
                         <input type="password" name="password" id="password" placeholder="password"><br>
-                        <input type="submit" id="Submit" value="LogIn" class="btn btn-common">
-                        <a href="register.php"  class="btn btn-common">Register</a>
+                        <input type="submit" id="Submit" value="ເຂົ້າສູລະບົບ" class="btn btn-common">
+                        <a href="register.php"  class="btn btn-common">ລົງທະບຽນ</a>
                     </form>
 
                 </div>

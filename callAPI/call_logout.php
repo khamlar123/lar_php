@@ -16,7 +16,7 @@
 
             if($telegamtoken =="" && $telegamid ==""){
                 echo "<script>
-             alert('are you sure logout?');location='../index.php';</script>";
+             alert('ເຈົ້າຕ້ອງການອອກຈາກລະບົບ?');location='../index.php';</script>";
             }else{
                 $tokentelegram = $telegamtoken;
                 $user_id = $telegamid;
@@ -42,7 +42,7 @@
           
 
              echo "<script>
-             alert('are you sure logout?');location='../index.php';</script>";
+             alert('ເຈົ້າຕ້ອງການອອກຈາກລະບົບ?');location='../index.php';</script>";
             //  header("location:../view/index.php");
   
          }else{

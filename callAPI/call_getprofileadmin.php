@@ -26,7 +26,6 @@
             // die;
             // echo $json_data['msg']['name'];
         }else{
-            
             echo "<script>
                 alert('plzz login!!');location='../view/index.php';</script>";
         } 

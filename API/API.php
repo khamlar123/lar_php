@@ -132,7 +132,7 @@ $data = json_decode($json, TRUE);
                 $dataRe['Village'] = $row['village'];
                 $dataRe['City'] = $row['City'];
                 $dataRe['Province'] = $row['Province'];
-                $dataRe['whatapps'] =$row['whatapps'];
+            
             }
             $output['code'] = '200';
             $output['msg'] = $dataRe;
@@ -330,10 +330,12 @@ $data = json_decode($json, TRUE);
         $village = $data['village'];
         $city = $data['city'];
         $province = $data['province'];
-        $whatapps = $data['whatapps'];
+        $whatapps = $data['telegramnumber'];
+        $telegramtoken = $data['telegramtoken'];
+        $telegramid = $data['telegramid'];
 
-        $sql = "INSERT INTO `tb_admin`(`adminname`, `adminlastname`, `email`, `password`, `createDate`, `modifyDate`, `phone`, `img`, `token`, `village`, `city`, `province`, `whatapps`) 
-                VALUES ('$aname', '$alname', '$email', '$p', '$created', '$mdate', '$phone', '$img', '$token', '$village', '$city', '$province', '$whatapps')";
+        $sql = "INSERT INTO `tb_admin`(`adminname`, `adminlastname`, `email`, `password`, `createDate`, `modifyDate`, `phone`, `img`, `token`, `village`, `city`, `province`, `telegramnumber`,`telegramtoken`,`telegramid`) 
+                VALUES ('$aname', '$alname', '$email', '$p', '$created', '$mdate', '$phone', '$img', '$token', '$village', '$city', '$province', '$telegramnumber','$telegramtoken','$telegramid')";
 
                 // echo $sql;
 

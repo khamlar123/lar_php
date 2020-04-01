@@ -60,7 +60,7 @@
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                 if($json_his ['code'] !=="200"){
 	
-                    echo "Error ";
+                    echo "<center><h3>ກະລູນາເລືອກລາຍຊື່ພະນັກງານກ່ອນ</h3></center>";
                     die;
                 } 
                 else{
@@ -69,15 +69,17 @@
                         if(is_array($data)){
                              echo "<body id='prin'>
                                         <div class='col-sm-6 col-md-3'> 
-                                            <div class='single-table' >
-                                                <div >
-                                                <h2>".$json_his['msg']['username']."</h2>
+                                            <div class='panel panel-info'>
+                                                <div class='panel-heading'><h2>".$json_his['msg']['username']."</h2></div>
+                                                    <div class='panel-body'>
+                                                        <ul>
+                                                            <li>ລໍາດັບ:".$number++."</li>
+                                                            <li>ວັນທີ:".$data['logindate'] = date('F j, Y')."</li>
+                                                            <li>".$data['logindate'] ."<span><i class='fa fa-check'></i></span></li>
+                                                            <li>".$data['logoutdate'] ."<span><i class='fa fa-times'></i></span></li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
-                                                    <ul>
-                                                        <li>No:".$number++."</li>
-                                                        <li>Login:".$data['logindate']."<span><i class='fa fa-check'></i></span></li>
-                                                        <li>Logout:".$data['logoutdate']."<span><i class='fa fa-times'></i></span></li>
-                                                    </ul>
                                             </div>
                                         </div>
                                     </body>";
@@ -86,5 +88,3 @@
                 }
                
 ?>
-
-   

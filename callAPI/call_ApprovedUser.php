@@ -1,21 +1,21 @@
 <?php 
     include('../API/connect.php');
     $api = 'approveduser';
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $create = $_POST['create'];
-    $village = $_POST['village'];
-    $city = $_POST['city'];
-    $img = $_POST['img'];
-    $province = $_POST['province'];
-    $password = $_POST['password'];
-    $role = $_POST['role'];
-    $adminname = $_POST['adminname'];
-    $adminid = $_POST['adminid'];
-    $token = $_POST['token'];
+    $id = $_GET['id'];
+    $name = $_GET['name'];
+    $lname = $_GET['lname'];
+    $email = $_GET['email'];
+    $phone = $_GET['phone'];
+    $create = $_GET['create'];
+    $village = $_GET['village'];
+    $city = $_GET['city'];
+    $img = $_GET['img'];
+    $province = $_GET['province'];
+    $password = $_GET['password'];
+    $role = $_GET['role'];
+    $adminname = $_GET['adminname'];
+    $adminid = $_GET['adminid'];
+    $token = $_GET['token'];
 
     //check token//
     if($token!=""){
@@ -52,6 +52,9 @@
         "adminname" => $adminname,
         "token"=>$token,
     );
+
+    // var_dump($data);
+    // die;
  
     $ch = curl_init( 'http://localhost/my_project/API/API.php' );
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

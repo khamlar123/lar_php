@@ -1,6 +1,6 @@
 <?php 
     $api = 'rejectuser';
-    $id = $_POST['id'];
+    $id = $_GET['id'];
     $data = array(
         "api" => $api,
         "id" => $id,

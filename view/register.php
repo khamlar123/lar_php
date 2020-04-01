@@ -30,22 +30,22 @@
    
     <center><form action="../callAPI/call_Register.php" method="post" enctype="multipart/form-data">
             <div class="container" style="width:400px;"> 
-            <h1>Register</h1> 
-            <p>Please fill in this form to create an account.</p>    
-            <input type="text" class="form-control" placeholder="Name" name="name" required></br>
-            <input type="text" class="form-control" placeholder="Last Name" name="lname" required></br>
+            <h1>ລົງທະບຽນ</h1> 
+            <!-- <p>Please fill in this form to create an account.</p>     -->
+            <input type="text" class="form-control" placeholder="ຊື່" name="name" required></br>
+            <input type="text" class="form-control" placeholder="ນາມສະກຸນ" name="lname" required></br>
             <input type="email" class="form-control" placeholder="Email" name="email" required><br>
             <input type="password" class="form-control" placeholder="password" name="password" required><br>
-            <input type="text" class="form-control" placeholder="Phone" name="phone" required><br>
+            <input type="text" class="form-control" placeholder="ເບີໂທ" name="phone" required><br>
             <!-- <input type="text" class="form-control" placeholder="image" name="img" required><br> -->
             <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" required><br>
-            <input type="text" class="form-control" placeholder="Village" name="village" required><br>
-            <input type="text" class="form-control" placeholder="City" name="city" required><br>
-            <input type="text" class="form-control" placeholder="Province" name="province" required><br>
-            <button type="submit" class="btn btn-common">Register</button>
+            <input type="text" class="form-control" placeholder="ບ້ານ" name="village" required><br>
+            <input type="text" class="form-control" placeholder="ເມືອງ" name="city" required><br>
+            <input type="text" class="form-control" placeholder="ແຂວງ" name="province" required><br>
+            <button type="submit" class="btn btn-common">ລົງທະບຽນ</button>
             </div>
             <div class="container signin">
-                <p>Already have an account? <a href="index.php">Sign in</a>.</p>
+                <p>ມີບັນຊີຢູ່ແລ້ວ? <a href="index.php">ເຂົ້າສູລະບົບ</a>.</p>
             </div>
     </form></center></br>
 

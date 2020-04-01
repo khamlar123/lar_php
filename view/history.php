@@ -191,7 +191,7 @@
                 <?php } ?>
             </select>
             <!-- end select day -->
-            <input type="submit" value="show" class="btn btn-common">
+            <input type="submit" value="ລາຍງານ" class="btn btn-common">
     </form> </center>
     
         <footer id="footer">

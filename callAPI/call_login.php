@@ -56,9 +56,10 @@
                     file_get_contents($url);
                     // echo $url;
                     // die;
+                    header('location:../view/home.php');
                 }
                 //end send message to telegram//
-                header('location:../view/home.php');
+               
             }elseif($json_data['code']=='200 user'){
                 setcookie("userid", $json_data['msg']['userid'], time()+ (86400 * 30), "/","", 0);
                 setcookie("username", $json_data['msg']['username'], time()+ (86400 * 30), "/","", 0);
@@ -78,7 +79,7 @@
                 header('location:../view/homeuser.php');
             }else{
                 echo "<script>
-                alert('Incorrect email or passowrd!!');location='../view/index.php';
+                alert('ກະລຸນາກວດສອບ email ຫຼື passowrd!!');location='../view/index.php';
                 </script>";
                 // $_SESSION['token']=$json_data['msg']['token'];
                 // $_SESSION['hisid']=$json_data['msg']['historyid'];
@@ -88,7 +89,7 @@
               die;
         }else{
                 echo "<script>
-                alert('plzz enter your email!!');location='../view/index.php';
+                alert('ກະລຸນາປ້ແນ email!!');location='../view/index.php';
                 </script>";
         }
 //    mysqli_close();
