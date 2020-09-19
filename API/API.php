@@ -430,4 +430,133 @@ $data = json_decode($json, TRUE);
         echo json_encode($output);
         }
     }
+
+    if($data['api']=="ApproveProject"){
+        $data =array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+
+        $id = $data['id'];
+        $adminname =$data['adminName'];
+        $name = $data['name'];
+        $note = $data['note'];
+        $date = $data['date'];
+        $user = $data['user'];
+        date_default_timezone_set("Asia/Bangkok");
+        $created=date("Y-m-d H:i:s");
+
+
+
+
+        $sql = "INSERT INTO `tb_project`(`p_id`, `p_name`, `p_note`, `username`, `createDate`, `approveBy`, `approveDate`)
+         VALUES ($id,'$name','$note','$user','$date','$adminname','$created')";
+        if(mysqli_query($conn, $sql)){
+            $sql = "DELETE FROM `tb_projectReques` WHERE `p_id`= $id";
+            if(mysqli_query($conn, $sql)){
+                $output['code'] = '200';
+                $output['msg'] = $data;
+                echo json_encode($output);
+            }
+         
+           
+        }else{
+            $output['code'] = '201';
+            $output['msg'] = 'error';
+            echo json_encode($output);
+        }
+
+        // $sql = "UPDATE `tb_project` SET `status`=1,`approveBy`='$adminname' WHERE `p_id`=$id";
+        // // $sql = "UPDATE `tb_project` SET `status`=1 WHERE `p_id`=$id";
+        // $res = (mysqli_query($conn, $sql));
+        // if(mysqli_query($conn, $sql)){
+        //     $output['code'] = '200';
+        //     $output['msg'] = $data;
+        //     echo json_encode($output);
+        // }else{
+        //     $output['code'] = '201';
+        //     $output['msg'] = 'error';
+        //     echo json_encode($output);
+        // }
+    }
+
+    if($data['api']== "getProjectReques"){
+        $data = array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+
+        $sql ="SELECT * FROM tb_projectReques";
+        $res = mysqli_query($conn, $sql);
+        if(mysqli_query($conn, $sql)){
+            while($row = mysqli_fetch_Array($res)){
+                $sub = array();
+                $sub['p_id'] = $row[0]; 
+                $sub['p_name'] = $row[1];
+                $sub['p_note'] = $row[2];
+                $sub['username'] = $row[3];
+                $sub['createDate'] = $row[4];
+            
+                $data[] = $sub;   
+                // echo 'subbbbb',$sub;
+                // die;            
+            }
+            $output['code'] = '200';
+            $output['msg'] = $data;
+            echo json_encode($output);
+            die;
+        }else{
+            $output['code'] = '201';
+            $output['msg'] = 'error';
+            echo json_encode($output);
+        }
+    }
+
+    if($data['api']== "RejecProject"){
+        $data = array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+    
+        $id = $data['id'];
+    
+        if($id!=""){
+            $sql ="DELETE FROM `tb_project` WHERE `p_id`= $id";
+                if(mysqli_query($conn, $sql)){
+                    $output['code'] = '200';
+                    $output['msg'] = $data;
+                    echo json_encode($output);
+                    die;
+                }else{
+                $output['code'] = '201';
+                $output['msg'] = 'error';
+                echo json_encode($output);
+                die;
+            }
+        }
+    }
+
+    if($data['api']== "addProject"){
+        $data = array();
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, TRUE);
+
+        $p_name = $data['p_name'];
+        $p_note = $data['p_note'];
+        $username = $data['username'];
+        date_default_timezone_set("Asia/Bangkok");
+        $created=date("Y-m-d H:i:s");
+        
+            $sql ="INSERT INTO `tb_projectReques`( `p_name`, `p_note`, `username`, `createDate`) 
+            VALUES ('$p_name','$p_note','$username','$created')";
+     if(mysqli_query($conn,$sql)){
+        $output['code'] = '200';
+        $output['msg'] = $data;
+        echo json_encode($output);
+        die;
+     }else{
+        $output['code'] = '201';
+        $output['msg'] = 'error';
+        echo json_encode($output);
+        die;
+     }
+
+    }
 ?>
