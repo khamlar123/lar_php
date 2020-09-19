@@ -9,7 +9,7 @@
         define('DB_NAME', 'lar_project');
     
         function connect(){
-            $conn = mysqli_connect(DB_HOST ,DB_USER ,DB_PASS ,DB_NAME);
+            $connect = mysqli_connect(DB_HOST ,DB_USER ,DB_PASS ,DB_NAME);
     
             if (mysqli_connect_errno($connect)) {
                 die("Failed to connect:" . mysqli_connect_error());
@@ -20,7 +20,7 @@
             return $connect;
             }
     
-            $con = connect();
+            $conn = connect();
 
     // $conn = mysqli_connect("localhost","root","","lar_project") or die("can't conect data base");
 ?>
